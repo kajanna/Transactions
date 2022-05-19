@@ -1,0 +1,29 @@
+.user-input {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 24px;
+}
+.user-input__field {
+    border: 1px solid var(--grey);
+    height: 24px;
+    margin-bottom: 24px;
+    padding: 5px 10px;
+    font-size: medium;
+    border-radius: 18px;
+    outline: none;
+    width: calc(100% - 24px);
+}
+.user-input__label {
+    color: var(--grey);
+    font-size: smaller;
+    margin: 5px 10px; 
+    letter-spacing: .5px;
+}
+.user-input__error {
+    position: absolute;
+    top: 70px;
+    color: var(--error);
+    font-size: smaller;
+    margin-left: .5rem; 
+}

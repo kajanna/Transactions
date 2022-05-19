@@ -1,0 +1,5 @@
+.all-transaction {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    margin-bottom: 24px;
+}
