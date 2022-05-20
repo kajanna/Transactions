@@ -1,7 +1,7 @@
 .transaction {
     font-size: small;
     display: grid;
-    grid-template-columns: 3fr 1fr  1fr;
+    grid-template-columns: 3fr 1fr  1fr 1fr;
     column-gap: 12px;
     padding: 12px 0;
     border-top: 1px solid var(--grey);

@@ -1,4 +1,4 @@
-import React from 'react';
+import { useAppSelector } from '../shared/hooks/reduxHooks';
 
 import Transaction from './Transaction';
 import Card from '../shared/Card';
@@ -6,11 +6,12 @@ import Card from '../shared/Card';
 import './ShowTransactionInfo.css'
 
 const ShowTransactionsInfo = () => {
+  const allTransactions = useAppSelector(state => state.transactions.allTransactions)
   return (
     <Card title='Transactions Info'>
       <div className='all-transaction'>
         <div>All Transactions</div>
-        <div>1244.53</div>
+        <div>{allTransactions} EUR</div>
       </div>
       <div>
         <div>Max Transaction</div>
