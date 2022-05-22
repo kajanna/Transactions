@@ -18,7 +18,7 @@ const transactionSchema = Yup.object().shape({
     .test(
       "is-min",
       "minimum transaction amount is 0.01 or -0.01",
-      (values) => Number(values) > 0.01 || Number(values) < -0.01
+      (values) => Number(values) >= 0.01 || Number(values) <= -0.01
     )
     .required("transaction amount is required"),
 });
