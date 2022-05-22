@@ -9,13 +9,15 @@
     align-content: center;
     width: 290px;
 }
+
 .card__title {
     font-size: larger;
     color: var(--darkgrey);
     margin-bottom: 24px;
     text-align: center;
 }
-@media  (min-width: 750px) {
+
+@media (min-width: 750px) {
     .card {
         width: 400px;
     }
@@ -25,4 +27,4 @@
     .card {
         margin: 24px;
     }
-  }
+}

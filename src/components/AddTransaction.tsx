@@ -13,11 +13,14 @@ import UserForm from "../shared/UserForm";
 const transactionSchema = Yup.object().shape({
   name: Yup.string().required("Required"),
   amount: Yup.number()
-  .typeError("transaction amount must be a number")
-  .notOneOf([0], "minimum transaction amount is 0.01")
-  .max(9007199254740991, "maximum transaction amount is 9007199254740991")
-  .test("is-min", "minimum transaction amount is 0.01 or -0.01", values => Number(values) > 0.01 || Number(values)  < -0.01)
-  .required("transaction amount is required")
+    .typeError("transaction amount must be a number")
+    .max(9007199254740991, "maximum transaction amount is 9007199254740991")
+    .test(
+      "is-min",
+      "minimum transaction amount is 0.01 or -0.01",
+      (values) => Number(values) > 0.01 || Number(values) < -0.01
+    )
+    .required("transaction amount is required"),
 });
 
 const AddTransaction = () => {

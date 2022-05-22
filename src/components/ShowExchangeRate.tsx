@@ -5,6 +5,7 @@ import { changeExchangeRate } from "../redux/transactionSlice";
 import Card from "../shared/Card";
 import Modal from "../shared/Modal";
 import Button from "../shared/Button";
+import LoadingSpinner from "../shared/LoadingSpinner";
 
 const ShowExchangeRate = () => {
   const dispatch = useAppDispatch();
@@ -58,6 +59,7 @@ const ShowExchangeRate = () => {
           </div>
         </Modal>
       )}
+      { loading && <LoadingSpinner />}
       <Card title="Current exchange rate">
         <div className="center">
           1 <span className="currency-name">EUR</span> - {exchangeRate}{" "}

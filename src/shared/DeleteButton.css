@@ -9,9 +9,10 @@
     outline: none;
     border: none;
     margin-top: -5px;
-    transition: all .5s ease-out; 
+    transition: all .5s ease-out;
     border: none
 }
+
 .delete-button:hover {
     background-color: var(--lightmain);
     cursor: pointer;

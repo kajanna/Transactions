@@ -11,7 +11,7 @@ const ShowTransactionsInfo = () => {
   );
   return (
     <Card title="Transactions with the highest amount">
-        <div>
+      <div>
         {maxTransactions.length === 0 && (
           <p className="center">No transactions.</p>
         )}

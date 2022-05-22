@@ -7,7 +7,6 @@ import TotalAmount from "./components/TotalAmount";
 
 import "./App.css";
 
-
 function App() {
   return (
     <div className="app">
@@ -18,7 +17,7 @@ function App() {
           <ChangeExchangeRate />
         </div>
         <div>
-          <TotalAmount/>
+          <TotalAmount />
           <ShowTransactionsInfo />
           <TransactionList />
         </div>

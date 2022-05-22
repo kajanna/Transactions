@@ -4,6 +4,7 @@
     flex-direction: column;
     margin-bottom: 24px;
 }
+
 .user-input__field {
     border: 1px solid var(--grey);
     height: 18px;
@@ -14,16 +15,18 @@
     outline: none;
     width: calc(100% - 24px);
 }
+
 .user-input__label {
     color: var(--grey);
     font-size: 11px;
-    margin: 5px 10px; 
+    margin: 5px 10px;
     letter-spacing: .5px;
 }
+
 .user-input__error {
     position: absolute;
     top: 70px;
     color: var(--error);
     font-size: 11px;
-    margin-left: .5rem; 
+    margin-left: .5rem;
 }
