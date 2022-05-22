@@ -10,24 +10,22 @@ import UserInput from "../shared/UserInput";
 import UserForm from "../shared/UserForm";
 
 interface exchangeRateValues {
-  exchangeRate: number;
+  exchangeRate: string;
 }
 
 const exchangeRateSchema = Yup.object().shape({
   exchangeRate: Yup.number()
-    .typeError("amount must be a number")
-    .positive("amount must be greater than zero")
-    .required("amount is required"),
+    .typeError("exchange rate must be a number")
+    .min(0.01, "minimum exchange rate is 0.01")
+    .max(9007199254740991, "maximum exchange rate is 9007199254740991")
+    .required("exchange rate is required"),
 });
 
 const ChangeExchangeRate = () => {
   const dispatch = useAppDispatch();
 
   const initialValues: exchangeRateValues = {
-    exchangeRate: 0,
-  };
-  const onSubmit = (values: exchangeRateValues) => {
-    dispatch(changeExchangeRate(+values.exchangeRate));
+    exchangeRate: "",
   };
   return (
     <Card title="Provide your own Exchange Rate">
@@ -35,17 +33,20 @@ const ChangeExchangeRate = () => {
         <Formik
           initialValues={initialValues}
           validationSchema={exchangeRateSchema}
-          onSubmit={onSubmit}
+          onSubmit={(values: exchangeRateValues, { resetForm }) => {
+            dispatch(changeExchangeRate(values.exchangeRate));
+            resetForm();
+          }}
         >
           {({ errors, touched }) => (
             <Form>
               <UserInput
                 name="exchangeRate"
-                label="exchangeRate"
+                label="exchange rate/PLN"
                 error={errors.exchangeRate}
                 touched={touched.exchangeRate}
               />
-              <Button type="submit" text="ADD" />
+              <Button type="submit" text="ADD EXCHANGE RATE" />
             </Form>
           )}
         </Formik>

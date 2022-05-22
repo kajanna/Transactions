@@ -1,27 +1,38 @@
 .app {
   background-color: #ffffff;
-  margin: 24px;
+  margin: 48px 12px;
 }
 main {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
 :root {
   --darkgrey: #404040;
   --grey: #A0B4B4;
   --main: #2626a3;
   --lightmain: #007aff;
-  ;
   --shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
   --error: #FF005C;
 }
 
-.centerText {
+.center {
   text-align: center;
 }
 
-.greyText {
-  color: var(--grey);
+.currency-name {
+  color: var(--darkgrey);
+  font-size: x-small;
+}
+
+@media (min-width: 1200px) {
+  .app {
+    margin-top: 24px;
+    margin-left: calc(50% - 496px);
+  }
+  main {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+  }
 }

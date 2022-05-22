@@ -11,7 +11,7 @@ const TransactionList = () => {
     <Card title="Transactions List">
       <div>
         {transactions.length === 0 && (
-          <p className="centerText greyText">No transactions.</p>
+          <p className="center">No transactions.</p>
         )}
         {transactions.map((t) => (
           <Transaction
@@ -20,6 +20,7 @@ const TransactionList = () => {
             name={t.name}
             amountEUR={t.amountEUR}
             amountPLN={t.amountPLN}
+            showDeleteButton
           />
         ))}
       </div>

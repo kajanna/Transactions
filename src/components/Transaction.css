@@ -1,13 +1,13 @@
 .transaction {
     font-size: small;
     display: grid;
-    grid-template-columns: 3fr 1fr  1fr 1fr;
+    grid-template-columns: 2fr 1fr  1fr .5fr;
     column-gap: 12px;
     padding: 12px 0;
     border-top: 1px solid var(--grey);
 }
-.transaction__info {
-    font-size: smaller;
-    color: var(--darkgrey);
-    
+.delete-transaction__buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 100px;
 }

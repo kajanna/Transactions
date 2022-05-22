@@ -3,17 +3,25 @@ import AddTransaction from "./components/AddTransaction";
 import ShowTransactionsInfo from "./components/ShowTransactionsInfo";
 import ShowExchangeRate from "./components/ShowExchangeRate";
 import ChangeExchangeRate from "./components/ChangeExchangeRate";
+import TotalAmount from "./components/TotalAmount";
+
 import "./App.css";
+
 
 function App() {
   return (
     <div className="app">
       <main>
-        <AddTransaction />
-        <ShowExchangeRate />
-        <ChangeExchangeRate />
-        <TransactionList />
-        <ShowTransactionsInfo />
+        <div>
+          <AddTransaction />
+          <ShowExchangeRate />
+          <ChangeExchangeRate />
+        </div>
+        <div>
+          <TotalAmount/>
+          <ShowTransactionsInfo />
+          <TransactionList />
+        </div>
       </main>
     </div>
   );

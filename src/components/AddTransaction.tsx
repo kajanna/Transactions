@@ -13,32 +13,34 @@ import UserForm from "../shared/UserForm";
 const transactionSchema = Yup.object().shape({
   name: Yup.string().required("Required"),
   amount: Yup.number()
-    .typeError("amount must be a number")
-    .positive("amount must be greater than zero")
-    .required("amount is required"),
+  .typeError("transaction amount must be a number")
+  .notOneOf([0], "minimum transaction amount is 0.01")
+  .max(9007199254740991, "maximum transaction amount is 9007199254740991")
+  .test("is-min", "minimum transaction amount is 0.01 or -0.01", values => Number(values) > 0.01 || Number(values)  < -0.01)
+  .required("transaction amount is required")
 });
 
 const AddTransaction = () => {
   const dispatch = useAppDispatch();
-
   const initialValues: AddTransactionValues = {
     name: "",
-    amount: 0,
+    amount: "",
   };
-  const onSubmit = (values: AddTransactionValues) => {
-    const newTransaction = {
-      name: values.name,
-      amount: +values.amount,
-    };
-    dispatch(addTransaction(newTransaction));
-  };
+
   return (
     <Card title="Add transactions">
       <UserForm>
         <Formik
           initialValues={initialValues}
           validationSchema={transactionSchema}
-          onSubmit={onSubmit}
+          onSubmit={(values: AddTransactionValues, { resetForm }) => {
+            const newTransaction = {
+              name: values.name,
+              amount: values.amount,
+            };
+            dispatch(addTransaction(newTransaction));
+            resetForm();
+          }}
         >
           {({ errors, touched }) => (
             <Form>
@@ -50,11 +52,11 @@ const AddTransaction = () => {
               />
               <UserInput
                 name="amount"
-                label="amount"
+                label="amount/EUR"
                 error={errors.amount}
                 touched={touched.amount}
               />
-              <Button type="submit" text="ADD" />
+              <Button type="submit" text="ADD TRANSACTION" />
             </Form>
           )}
         </Formik>

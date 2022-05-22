@@ -1,23 +1,30 @@
-import { useAppSelector } from '../shared/hooks/reduxHooks';
+import { useAppSelector } from "../shared/hooks/reduxHooks";
 
-import Transaction from './Transaction';
-import Card from '../shared/Card';
+import Transaction from "./Transaction";
+import Card from "../shared/Card";
 
-import './ShowTransactionInfo.css'
+import "./ShowTransactionInfo.css";
 
 const ShowTransactionsInfo = () => {
-  const allTransactions = useAppSelector(state => state.transactions.allTransactions)
+  const maxTransactions = useAppSelector(
+    (state) => state.transactions.maxTransactions
+  );
   return (
-    <Card title='Transactions Info'>
-      <div className='all-transaction'>
-        <div>All Transactions</div>
-        <div>{allTransactions} EUR</div>
+    <Card title="Transactions with the highest amount">
+        <div>
+        {maxTransactions.length === 0 && (
+          <p className="center">No transactions.</p>
+        )}
+        {maxTransactions.map((t) => (
+          <Transaction
+            showDeleteButton={false}
+            id={t.id}
+            name={t.name}
+            amountEUR={t.amountEUR}
+            amountPLN={t.amountPLN}
+          />
+        ))}
       </div>
-      <div>
-        <div>Max Transaction</div>
-        <Transaction id="p1" name="kot" amountEUR={123} amountPLN={333}/>
-      </div>
-     
     </Card>
   );
 };

@@ -2,20 +2,21 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { v4 as uuidv4 } from 'uuid';
 
 import { Transaction, AddTransactionValues } from "../shared/interfaces";
-import { calculateAllTransactions, calculateAllPLNTransactions } from "./transactionUtils";
+import { calculateTotalAmount, calculateAllPLNTransactions, findTransactionWithMaxAmount, convertAmount } from "./transactionUtils";
 import type { RootState } from '../redux/store';
 
 interface TransactionsState {
     transactions: Transaction[],
     exchangeRate: number,
-    maxTransaction: number,
+    maxTransactions: Transaction[],
     allTransactions: number
 }
+
 //initial value for exchangeRate is the average euro 2022 exchange rate.
 const initialState = {
     transactions: [],
     exchangeRate: 4.65,
-    maxTransaction: 0,
+    maxTransactions: [],
     allTransactions: 0
 } as TransactionsState
 
@@ -24,22 +25,28 @@ export const transactionsSlice = createSlice({
     initialState,
     reducers: {
       addTransaction: (state: TransactionsState,  action: PayloadAction<AddTransactionValues>) => {
+          const amountEUR = convertAmount(action.payload.amount);
+          const amountPLN = convertAmount(amountEUR * state.exchangeRate);
           const newTransaction: Transaction = {
               id: uuidv4(),
               name: action.payload.name,
-              amountEUR: action.payload.amount,
-              amountPLN: action.payload.amount * state.exchangeRate
+              amountEUR: amountEUR,
+              amountPLN: amountPLN
           };
           state.transactions.push(newTransaction);
-          state.allTransactions = calculateAllTransactions(state.transactions);
+          state.maxTransactions = findTransactionWithMaxAmount(state.transactions);
+          state.allTransactions = calculateTotalAmount(state.transactions);
+          
       },
       deleteTransaction: (state: TransactionsState,  action: PayloadAction<string>) => {
         state.transactions = state.transactions.filter(t => t.id !== action.payload);
-        state.allTransactions = calculateAllTransactions(state.transactions);
+        state.maxTransactions = findTransactionWithMaxAmount(state.transactions);
+        state.allTransactions = calculateTotalAmount(state.transactions);
       },
-      changeExchangeRate: (state: TransactionsState, action: PayloadAction<number>) => {
-        state.exchangeRate = action.payload;
-        calculateAllPLNTransactions(state.transactions, state.exchangeRate) 
+      changeExchangeRate: (state: TransactionsState, action: PayloadAction<string>) => {
+        state.exchangeRate = convertAmount(action.payload);
+        calculateAllPLNTransactions(state.transactions, state.exchangeRate);
+        state.maxTransactions = findTransactionWithMaxAmount(state.transactions); 
       },
     }
 });

@@ -1,8 +1,8 @@
-import React from 'react';
+import { Wrapper } from "./interfaces";
 
 import "./UserForm.css"
 
-const UserForm = ({ children }: React.PropsWithChildren<{}>) => {
+const UserForm = ({ children }: Wrapper) => {
     return <div className="form">{children}</div>;
   };
 

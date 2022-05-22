@@ -7,5 +7,9 @@ export interface Transaction {
 
 export interface AddTransactionValues {
     name: string,
-    amount: number
+    amount: string
+}
+
+export interface Wrapper {
+    children: JSX.Element[] | JSX.Element
 }
